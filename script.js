@@ -1,8 +1,8 @@
 const quoteCtn = document.getElementById("quote-ctn");
 const quoteTxt = document.getElementById("quote");
-const quoteAuthoer = document.getElementById("author");
-const twitterBtn = document.getElementById("twitter-btn");
-const newQuoteBtn = document.getElementById("new-quote");
+const quoteAuthor = document.getElementById("author");
+const twitterBtn = document.getElementById("twitter");
+const newQuoteBtn = document.getElementById("new-quote-btn");
 
 let apiQuotes = [];
 
@@ -13,12 +13,12 @@ function newQuote( ){
 
 // check if author field is blank, if so , put unknown as the author
     if(!quote.author){
-        quoteAuthoer.textContent = "Unknown"
+        quoteAuthor.textContent = "Unknown"
     } else{
-        quoteAuthoer.textContent = quote.author;
+        quoteAuthor.textContent = quote.author;
     }
 // check quote length to determine styling
-    if(quote.text.length > 80){
+    if(quote.text.length > 20){
         quoteTxt.classList.add('long-quote');
     }else{
         quoteTxt.classList.remove('long-quote');
@@ -41,13 +41,14 @@ async function getQuotes() {
 }
 // tweet quote
 function tweetQuote () {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteTxt.textContent} - ${quoteAuthoer.textContent} `;
-    window.open(twitterUrl, "_blank")
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteTxt.textContent} - ${quoteAuthor.textContent} `;
+    window.open(twitterUrl, "_blank");
 }
 
 // event listener
 
-
+newQuoteBtn.addEventListener('click', newQuote);
+twitterBtn.addEventListener('click' , tweetQuote);
 
 // on load
 getQuotes();
